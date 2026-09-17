@@ -1,0 +1,3014 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Física de lo Imposible</title>
+
+<style>
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:80px;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#02030f;
+    color:white;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
+}
+
+
+/* =========================================================
+   ESTRELLAS DEL ESPACIO
+========================================================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-5;
+}
+
+body::before{
+    background-image:
+        radial-gradient(circle, white 1px, transparent 1px),
+        radial-gradient(circle, #7ab8ff 1px, transparent 1px);
+    background-size:90px 90px, 150px 150px;
+    background-position:20px 30px, 70px 100px;
+    animation:estrellasMovimiento 25s linear infinite;
+}
+
+body::after{
+    background-image:
+        radial-gradient(circle, #ffffff 1px, transparent 1px),
+        radial-gradient(circle, #8d7cff 1px, transparent 1px);
+    background-size:180px 180px, 230px 230px;
+    opacity:.6;
+    animation:estrellasMovimiento2 40s linear infinite;
+}
+
+@keyframes estrellasMovimiento{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(180px);
+    }
+}
+
+@keyframes estrellasMovimiento2{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-220px);
+    }
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:2000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+
+    padding:14px;
+
+    background:rgba(2,3,15,.82);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(100,150,255,.25);
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:10px 14px;
+    border-radius:20px;
+    transition:.3s;
+    font-size:14px;
+}
+
+nav a:hover{
+    background:#163b86;
+    box-shadow:0 0 15px #317cff;
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   ESPACIO EN MOVIMIENTO DEL INICIO
+========================================================= */
+
+.hero{
+    position:relative;
+    min-height:95vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(46,53,130,.35),
+            rgba(2,3,15,.9) 55%,
+            #02030f 100%
+        );
+}
+
+.viaje-estrellas{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    perspective:700px;
+}
+
+.estrella-viaje{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:white;
+    border-radius:50%;
+
+    box-shadow:
+        0 0 6px white,
+        0 0 12px #72aaff;
+
+    animation:
+        viajarEstrella linear infinite;
+}
+
+@keyframes viajarEstrella{
+
+    from{
+        transform:
+            translate3d(
+                calc((var(--x)) * 1px),
+                calc((var(--y)) * 1px),
+                -900px
+            );
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    to{
+        transform:
+            translate3d(
+                calc((var(--x)) * 2.5px),
+                calc((var(--y)) * 2.5px),
+                500px
+            );
+
+        opacity:1;
+    }
+}
+
+
+/* =========================================================
+   NEBULOSAS
+========================================================= */
+
+.nebulosa1,
+.nebulosa2,
+.nebulosa3{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    pointer-events:none;
+}
+
+.nebulosa1{
+    width:350px;
+    height:350px;
+    background:rgba(49,69,255,.18);
+    top:10%;
+    left:5%;
+    animation:nebulosaMover1 12s ease-in-out infinite alternate;
+}
+
+.nebulosa2{
+    width:400px;
+    height:400px;
+    background:rgba(157,35,255,.14);
+    right:5%;
+    bottom:5%;
+    animation:nebulosaMover2 15s ease-in-out infinite alternate;
+}
+
+.nebulosa3{
+    width:250px;
+    height:250px;
+    background:rgba(0,183,255,.12);
+    left:45%;
+    top:30%;
+    animation:nebulosaMover3 10s ease-in-out infinite alternate;
+}
+
+@keyframes nebulosaMover1{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(120px,80px) scale(1.3);
+    }
+}
+
+@keyframes nebulosaMover2{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(-100px,-80px) scale(1.4);
+    }
+}
+
+@keyframes nebulosaMover3{
+    from{
+        transform:translate(0,0);
+    }
+    to{
+        transform:translate(70px,-70px);
+    }
+}
+
+
+/* =========================================================
+   METEORITOS
+========================================================= */
+
+.meteoritos{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.meteorito{
+    position:absolute;
+
+    width:4px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            white,
+            #55aaff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px white,
+        0 0 25px #4aa3ff;
+
+    transform:rotate(-45deg);
+
+    animation:meteoritoCaer linear infinite;
+}
+
+.meteorito:nth-child(1){
+    top:-100px;
+    left:20%;
+    animation-duration:5s;
+    animation-delay:1s;
+}
+
+.meteorito:nth-child(2){
+    top:-100px;
+    left:70%;
+    animation-duration:7s;
+    animation-delay:3s;
+}
+
+.meteorito:nth-child(3){
+    top:-100px;
+    left:50%;
+    animation-duration:6s;
+    animation-delay:5s;
+}
+
+@keyframes meteoritoCaer{
+    from{
+        transform:
+            translate(0,0)
+            rotate(-45deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    to{
+        transform:
+            translate(-500px,800px)
+            rotate(-45deg);
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.hero h1{
+    position:relative;
+    z-index:10;
+
+    font-size:clamp(40px,7vw,80px);
+
+    margin:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #69b8ff,
+            #c66cff,
+            #ffffff
+        );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:
+        tituloBrillo 5s linear infinite;
+
+    text-shadow:
+        0 0 25px rgba(80,150,255,.5);
+}
+
+@keyframes tituloBrillo{
+    from{
+        background-position:0%;
+    }
+
+    to{
+        background-position:300%;
+    }
+}
+
+.hero p{
+    position:relative;
+    z-index:10;
+
+    max-width:750px;
+
+    font-size:20px;
+    line-height:1.7;
+
+    color:#d8e8ff;
+}
+
+
+/* =========================================================
+   BOTÓN COMENZAR
+========================================================= */
+
+.comenzar{
+    position:relative;
+    z-index:10;
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    padding:16px 28px;
+
+    border-radius:30px;
+
+    color:white;
+    text-decoration:none;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1544a0,
+            #7020a4
+        );
+
+    box-shadow:
+        0 0 20px #367cff,
+        0 0 50px rgba(100,50,255,.3);
+
+    transition:.3s;
+}
+
+.comenzar:hover{
+    transform:
+        scale(1.08)
+        translateY(-5px);
+
+    box-shadow:
+        0 0 30px #54aaff,
+        0 0 70px #792fff;
+}
+
+
+/* =========================================================
+   PLANETA 3D
+========================================================= */
+
+.planeta{
+    position:relative;
+    z-index:10;
+
+    width:210px;
+    height:210px;
+
+    margin:30px 0;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #8be0ff 0%,
+            #2777cc 25%,
+            #102f80 60%,
+            #050a2d 100%
+        );
+
+    box-shadow:
+        inset -35px -25px 50px rgba(0,0,0,.7),
+        inset 20px 10px 35px rgba(255,255,255,.15),
+        0 0 30px #237cff,
+        0 0 70px rgba(30,100,255,.5);
+
+    animation:
+        planetaFlotar 5s ease-in-out infinite;
+
+    cursor:pointer;
+
+    transition:.4s;
+}
+
+.planeta::before{
+    content:"";
+
+    position:absolute;
+    inset:20px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.12);
+
+    transform:rotate(25deg);
+}
+
+.planeta:hover{
+    transform:scale(1.08) rotateY(25deg);
+}
+
+@keyframes planetaFlotar{
+    0%,100%{
+        transform:translateY(0) rotateY(0deg);
+    }
+
+    50%{
+        transform:translateY(-18px) rotateY(180deg);
+    }
+}
+
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+section{
+    position:relative;
+
+    min-height:80vh;
+
+    padding:90px 8%;
+
+    overflow:hidden;
+}
+
+section h2{
+    text-align:center;
+
+    font-size:clamp(30px,5vw,55px);
+
+    margin-bottom:35px;
+
+    color:#8cc8ff;
+
+    text-shadow:
+        0 0 15px #246eff;
+}
+
+.contenido{
+    max-width:1100px;
+    margin:auto;
+}
+
+.contenido p{
+    font-size:18px;
+    line-height:1.9;
+    color:#dbe8ff;
+}
+
+.destacado{
+    margin:30px 0;
+
+    padding:25px;
+
+    border-left:4px solid #5ba7ff;
+
+    border-radius:15px;
+
+    background:
+        rgba(35,74,150,.15);
+
+    box-shadow:
+        0 0 25px rgba(30,100,255,.15);
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.contenedor-tarjetas{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(230px,1fr));
+
+    gap:25px;
+
+    margin-top:40px;
+}
+
+.tarjeta{
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,50,110,.45),
+            rgba(30,10,70,.35)
+        );
+
+    border:1px solid rgba(100,170,255,.25);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.4),
+        inset 0 0 20px rgba(70,130,255,.05);
+
+    transition:.4s;
+
+    cursor:pointer;
+
+    transform-style:preserve-3d;
+}
+
+.tarjeta:hover,
+.tarjeta.seleccionada{
+    transform:
+        translateY(-10px)
+        rotateX(4deg)
+        rotateY(-4deg)
+        scale(1.02);
+
+    border-color:#5baaff;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.6),
+        0 0 30px rgba(70,150,255,.3);
+}
+
+.tarjeta h3{
+    color:#72bbff;
+}
+
+.tarjeta p{
+    font-size:16px;
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   AGUJERO NEGRO
+========================================================= */
+
+.agujero-contenedor{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:450px;
+}
+
+.espacio-negro{
+    position:relative;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #000 0 27%,
+            #120804 29%,
+            #6e2105 42%,
+            #ff7b18 52%,
+            #702007 60%,
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 35px #ff6b00,
+        0 0 80px rgba(255,70,0,.4);
+
+    animation:
+        agujeroGirar 8s linear infinite;
+
+    cursor:pointer;
+
+    transition:.5s;
+}
+
+.espacio-negro::before{
+    content:"";
+
+    position:absolute;
+
+    inset:25px -15px;
+
+    border-radius:50%;
+
+    border:12px solid rgba(255,100,20,.5);
+
+    transform:rotateX(70deg);
+
+    filter:blur(2px);
+}
+
+.espacio-negro:hover{
+    transform:scale(1.08) rotate(10deg);
+}
+
+@keyframes agujeroGirar{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   ESPACIO-TIEMPO
+========================================================= */
+
+.malla-contenedor{
+    position:relative;
+
+    width:100%;
+    max-width:900px;
+
+    height:400px;
+
+    margin:40px auto;
+
+    perspective:700px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(20,70,150,.3),
+            transparent 65%
+        );
+}
+
+.malla{
+    position:absolute;
+
+    width:140%;
+    height:140%;
+
+    left:-20%;
+    top:-10%;
+
+    background-image:
+        linear-gradient(
+            rgba(60,160,255,.35) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(60,160,255,.35) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    transform:
+        rotateX(65deg)
+        translateY(30px)
+        scale(1.3);
+
+    animation:
+        mallaMover 4s linear infinite;
+}
+
+@keyframes mallaMover{
+    from{
+        background-position:0 0;
+    }
+
+    to{
+        background-position:0 40px;
+    }
+}
+
+
+/* =========================================================
+   LUNA 3D
+========================================================= */
+
+.luna-contenedor{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    min-height:420px;
+}
+
+.luna{
+    position:relative;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #eeeeee,
+            #aaa 35%,
+            #656565 65%,
+            #252525 100%
+        );
+
+    box-shadow:
+        inset -35px -25px 45px rgba(0,0,0,.7),
+        inset 15px 10px 25px rgba(255,255,255,.2),
+        0 0 35px rgba(210,230,255,.35);
+
+    animation:
+        lunaFlotar 6s ease-in-out infinite;
+
+    cursor:pointer;
+
+    transition:.5s;
+}
+
+.luna::before,
+.luna::after{
+    content:"";
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:
+        rgba(30,30,30,.25);
+
+    box-shadow:
+        inset 3px 3px 5px rgba(0,0,0,.35);
+}
+
+.luna::before{
+    width:35px;
+    height:35px;
+    top:50px;
+    left:70px;
+}
+
+.luna::after{
+    width:55px;
+    height:55px;
+    bottom:40px;
+    right:45px;
+}
+
+.luna:hover{
+    transform:scale(1.1) rotateY(25deg);
+}
+
+@keyframes lunaFlotar{
+    0%,100%{
+        transform:translateY(0) rotateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px) rotateY(180deg);
+    }
+}
+
+
+/* =========================================================
+   SOL 3D
+========================================================= */
+
+.sol-contenedor{
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    min-height:500px;
+}
+
+.sol{
+    position:relative;
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fffbd0,
+            #fff04d 25%,
+            #ffad00 55%,
+            #ff5b00 78%,
+            #c82b00 100%
+        );
+
+    box-shadow:
+        0 0 35px #ffb300,
+        0 0 70px #ff7100,
+        0 0 130px rgba(255,90,0,.55);
+
+    animation:
+        solPulsar 2.5s ease-in-out infinite;
+
+    cursor:pointer;
+
+    transition:.4s;
+}
+
+.sol:hover{
+    transform:scale(1.1);
+}
+
+.sol.activo{
+    animation:
+        solExplosion .8s ease;
+}
+
+.rayos{
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    border-radius:50%;
+
+    border:8px dotted rgba(255,180,40,.6);
+
+    animation:
+        rayosGirar 5s linear infinite;
+
+    pointer-events:none;
+}
+
+@keyframes solPulsar{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.07);
+    }
+}
+
+@keyframes solExplosion{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.35);
+        filter:brightness(1.8);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+@keyframes rayosGirar{
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   CURIOSIDADES
+========================================================= */
+
+.curiosidades{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+}
+
+.curiosidad{
+    padding:25px;
+
+    border-radius:20px;
+
+    background:
+        rgba(25,50,110,.2);
+
+    border:
+        1px solid rgba(90,150,255,.25);
+
+    transition:.4s;
+}
+
+.curiosidad:hover{
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+        0 0 30px rgba(50,130,255,.2);
+}
+
+
+/* =========================================================
+   LÍNEA DEL TIEMPO
+========================================================= */
+
+.timeline{
+    max-width:900px;
+
+    margin:auto;
+
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+    bottom:0;
+
+    width:3px;
+
+    background:
+        linear-gradient(
+            #3b9dff,
+            #a743ff
+        );
+
+    transform:translateX(-50%);
+}
+
+.evento{
+    position:relative;
+
+    width:45%;
+
+    padding:20px;
+
+    margin:40px 0;
+
+    border-radius:15px;
+
+    background:
+        rgba(30,60,120,.25);
+
+    border:1px solid rgba(100,160,255,.2);
+}
+
+.evento:nth-child(odd){
+    margin-right:auto;
+}
+
+.evento:nth-child(even){
+    margin-left:auto;
+}
+
+.evento h3{
+    color:#7dc3ff;
+}
+
+
+/* =========================================================
+   MENSAJE DE INTERACCIÓN
+========================================================= */
+
+#mensaje{
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:
+        translateX(-50%)
+        translateY(100px);
+
+    z-index:4000;
+
+    padding:14px 22px;
+
+    border-radius:30px;
+
+    background:
+        rgba(10,20,50,.92);
+
+    border:
+        1px solid rgba(100,180,255,.4);
+
+    box-shadow:
+        0 0 25px rgba(50,140,255,.4);
+
+    transition:.4s;
+
+    pointer-events:none;
+
+    text-align:center;
+}
+
+#mensaje.mostrar{
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =========================================================
+   BOTÓN DE SONIDO
+========================================================= */
+
+#sonidoBtn{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:3000;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #173d8f,
+            #701b9c
+        );
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 15px #347cff,
+        0 0 30px rgba(80,50,255,.35);
+
+    transition:.3s;
+}
+
+#sonidoBtn:hover{
+    transform:scale(1.15);
+
+    box-shadow:
+        0 0 25px #55aaff,
+        0 0 60px #7b2cff;
+}
+
+
+/* =========================================================
+   BOTONES IMPRIMIR Y COMPARTIR
+========================================================= */
+
+.botones-accion{
+    position:fixed;
+
+    left:20px;
+    bottom:20px;
+
+    display:flex;
+
+    gap:12px;
+
+    z-index:3000;
+}
+
+.botones-accion button{
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #173d8f,
+            #701b9c
+        );
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 15px #347cff,
+        0 0 30px rgba(80,50,255,.35);
+
+    transition:.3s;
+}
+
+.botones-accion button:hover{
+    transform:
+        scale(1.15)
+        translateY(-5px);
+
+    box-shadow:
+        0 0 25px #55aaff,
+        0 0 60px #7b2cff;
+}
+
+.botones-accion button:active{
+    transform:scale(.9);
+}
+
+
+/* =========================================================
+   PIE DE PÁGINA
+========================================================= */
+
+footer{
+    text-align:center;
+
+    padding:50px 20px;
+
+    background:
+        rgba(0,0,20,.7);
+
+    border-top:
+        1px solid rgba(100,150,255,.2);
+
+    color:#b9d7ff;
+}
+
+
+/* =========================================================
+   IMPRESIÓN
+========================================================= */
+
+@media print{
+
+    nav,
+    #sonidoBtn,
+    .botones-accion,
+    #mensaje,
+    .meteoritos,
+    .viaje-estrellas{
+        display:none !important;
+    }
+
+    body{
+        background:white !important;
+        color:black !important;
+    }
+
+    section{
+        min-height:auto;
+
+        page-break-inside:avoid;
+    }
+
+    section h2,
+    .contenido p,
+    .tarjeta,
+    .evento{
+        color:black !important;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media(max-width:600px){
+
+    nav{
+        gap:3px;
+        padding:8px;
+    }
+
+    nav a{
+        font-size:12px;
+        padding:8px 9px;
+    }
+
+    .hero{
+        min-height:92vh;
+    }
+
+    .hero p{
+        padding:0 20px;
+        font-size:17px;
+    }
+
+    .planeta{
+        width:160px;
+        height:160px;
+    }
+
+    .espacio-negro{
+        width:240px;
+        height:240px;
+    }
+
+    .luna{
+        width:180px;
+        height:180px;
+    }
+
+    .sol{
+        width:190px;
+        height:190px;
+    }
+
+    .rayos{
+        width:280px;
+        height:280px;
+    }
+
+    section{
+        padding:70px 20px;
+    }
+
+    .timeline::before{
+        left:10px;
+    }
+
+    .evento,
+    .evento:nth-child(odd),
+    .evento:nth-child(even){
+        width:90%;
+        margin-left:30px;
+        margin-right:0;
+    }
+
+    .botones-accion{
+        left:12px;
+        bottom:12px;
+    }
+
+    #sonidoBtn{
+        right:12px;
+        bottom:12px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVEGACIÓN
+===================================================== -->
+
+<nav>
+
+<a href="#inicio">Inicio</a>
+<a href="#tiempo">Viajes en el tiempo</a>
+<a href="#agujeros">Agujeros negros</a>
+<a href="#espacio-tiempo">Espacio-tiempo</a>
+<a href="#luna">Luna</a>
+<a href="#sol">Sol</a>
+<a href="#curiosidades">Curiosidades</a>
+
+</nav>
+
+
+<!-- =====================================================
+     INICIO
+===================================================== -->
+
+<header class="hero" id="inicio">
+
+<div class="viaje-estrellas" id="viajeEstrellas"></div>
+
+<div class="nebulosa1"></div>
+<div class="nebulosa2"></div>
+<div class="nebulosa3"></div>
+
+<div class="meteoritos">
+
+<div class="meteorito"></div>
+<div class="meteorito"></div>
+<div class="meteorito"></div>
+
+</div>
+
+
+<h1>🌌 Física de lo Imposible</h1>
+
+<p>
+Explorando los límites del universo, el espacio,
+el tiempo y la realidad.
+</p>
+
+
+<div
+class="planeta"
+id="planeta3D"
+title="Toca el planeta">
+</div>
+
+
+<a
+href="#tiempo"
+class="comenzar">
+🚀 COMENZAR VIAJE
+</a>
+
+</header>
+
+
+<!-- =====================================================
+     INTRODUCCIÓN
+===================================================== -->
+
+<section>
+
+<div class="contenido">
+
+<h2>🔭 ¿Qué es la física de lo imposible?</h2>
+
+<p>
+La física de lo imposible explora aquellas ideas que parecen
+sacadas de una película de ciencia ficción, pero que pueden
+analizarse utilizando las leyes conocidas de la física.
+Algunas posibilidades son científicamente viables, otras
+requieren condiciones extremas y algunas permanecen como
+preguntas abiertas.
+</p>
+
+<p>
+El universo es mucho más extraño de lo que podemos observar
+a simple vista. El espacio y el tiempo pueden cambiar según
+el movimiento y la gravedad, las estrellas pueden convertirse
+en agujeros negros y la luz puede quedar atrapada cerca de
+objetos extremadamente compactos.
+</p>
+
+
+<div class="destacado">
+
+<h3>💡 Una pregunta fascinante</h3>
+
+<p>
+¿Dónde termina la ciencia y dónde comienza lo que todavía
+no comprendemos?
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     VIAJES EN EL TIEMPO
+===================================================== -->
+
+<section id="tiempo">
+
+<div class="contenido">
+
+<h2>⏳ Viajes en el tiempo</h2>
+
+<p>
+Viajar en el tiempo es una de las ideas más famosas de la
+ciencia ficción. Sin embargo, la física moderna demuestra
+que el tiempo no transcurre exactamente igual para todos
+los observadores.
+</p>
+
+<p>
+Según la teoría de la relatividad de Albert Einstein,
+cuando un objeto se mueve a velocidades muy altas,
+cercanas a la velocidad de la luz, el tiempo que experimenta
+puede transcurrir más lentamente respecto a un observador
+que se encuentra en reposo.
+</p>
+
+<p>
+Este fenómeno se conoce como <strong>dilatación temporal</strong>.
+No es solamente una idea teórica: los sistemas modernos de
+navegación por satélite deben considerar efectos relativistas
+para mantener su precisión.
+</p>
+
+
+<div class="contenedor-tarjetas">
+
+<div class="tarjeta">
+
+<h3>🚀 Viajar al futuro</h3>
+
+<p>
+En cierto sentido, viajar hacia el futuro es compatible con
+la física conocida. Un viajero que se desplazara a velocidades
+extremadamente altas podría experimentar menos tiempo que
+las personas que permanecieran en la Tierra.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🕰️ Viajar al pasado</h3>
+
+<p>
+El viaje hacia el pasado es mucho más problemático.
+Algunas soluciones matemáticas de la relatividad permiten
+estructuras conocidas como curvas temporales cerradas,
+pero no existe evidencia experimental de que puedan utilizarse
+para viajar al pasado.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🌌 Agujeros de gusano</h3>
+
+<p>
+Los agujeros de gusano son estructuras hipotéticas que
+podrían conectar regiones alejadas del espacio-tiempo.
+Hasta ahora no se ha observado ninguno y no sabemos si
+podrían existir de manera estable.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     AGUJEROS NEGROS
+===================================================== -->
+
+<section id="agujeros">
+
+<div class="contenido">
+
+<h2>🕳️ Agujeros negros</h2>
+
+<div class="agujero-contenedor">
+
+<div
+class="espacio-negro"
+id="agujeroNegro"
+title="Toca el agujero negro">
+</div>
+
+</div>
+
+
+<p>
+Un agujero negro es una región del espacio-tiempo donde
+la gravedad es tan intensa que, una vez que algo cruza su
+horizonte de sucesos, no puede escapar hacia el exterior,
+ni siquiera la luz.
+</p>
+
+<p>
+Muchos agujeros negros se forman cuando estrellas muy
+masivas agotan su combustible y sus núcleos colapsan bajo
+su propia gravedad. También existen agujeros negros
+supermasivos en el centro de muchas galaxias.
+</p>
+
+
+<div class="contenedor-tarjetas">
+
+<div class="tarjeta">
+
+<h3>🌑 Horizonte de sucesos</h3>
+
+<p>
+Es el límite alrededor del agujero negro a partir del cual
+la velocidad necesaria para escapar supera la velocidad de
+la luz.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🔥 Disco de acreción</h3>
+
+<p>
+El material que cae hacia un agujero negro puede formar un
+disco extremadamente caliente. El gas puede alcanzar
+temperaturas enormes y emitir radiación.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>⚫ Singularidad</h3>
+
+<p>
+En la descripción clásica de la relatividad general,
+la materia que colapsa puede llegar a una región llamada
+singularidad, donde las ecuaciones conocidas dejan de
+proporcionar una descripción completa.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ESPACIO-TIEMPO
+===================================================== -->
+
+<section id="espacio-tiempo">
+
+<div class="contenido">
+
+<h2>🌌 El espacio-tiempo</h2>
+
+<p>
+El espacio y el tiempo no son completamente independientes.
+En la relatividad se describen juntos como una estructura
+de cuatro dimensiones llamada espacio-tiempo.
+</p>
+
+<p>
+La presencia de materia y energía modifica la geometría
+del espacio-tiempo. Desde esta perspectiva, la gravedad
+puede entenderse como la curvatura de esa geometría.
+</p>
+
+
+<div class="malla-contenedor">
+
+<div class="malla"></div>
+
+</div>
+
+
+<div class="destacado">
+
+<h3>🧠 Una idea sorprendente</h3>
+
+<p>
+La Tierra no está simplemente siendo "jalada" por el Sol
+como una fuerza invisible en el sentido clásico. En la
+relatividad general, la masa del Sol modifica el espacio-tiempo
+y los planetas siguen trayectorias determinadas por esa
+geometría.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LUNA
+===================================================== -->
+
+<section id="luna">
+
+<div class="contenido">
+
+<h2>🌙 La Luna</h2>
+
+<div class="luna-contenedor">
+
+<div
+class="luna"
+id="luna3D"
+title="Toca la Luna">
+</div>
+
+</div>
+
+
+<p>
+La Luna es el único satélite natural permanente de la Tierra.
+Su presencia influye en fenómenos como las mareas y ha sido
+fundamental para la historia de la exploración espacial.
+</p>
+
+<p>
+La superficie lunar presenta numerosos cráteres producidos
+principalmente por impactos de asteroides y otros cuerpos
+durante miles de millones de años.
+</p>
+
+
+<div class="contenedor-tarjetas">
+
+<div class="tarjeta">
+
+<h3>🌕 Fases lunares</h3>
+
+<p>
+Las fases de la Luna se producen porque observamos diferentes
+porciones iluminadas por el Sol mientras la Luna orbita la Tierra.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🌊 Mareas</h3>
+
+<p>
+La gravedad de la Luna contribuye de manera importante a las
+mareas oceánicas de la Tierra.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🚀 Exploración</h3>
+
+<p>
+Las misiones Apolo llevaron seres humanos a la superficie
+lunar entre 1969 y 1972. Desde entonces, diferentes agencias
+espaciales han continuado estudiando la Luna.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SOL
+===================================================== -->
+
+<section id="sol">
+
+<div class="contenido">
+
+<h2>☀️ El Sol</h2>
+
+<div class="sol-contenedor">
+
+<div class="rayos"></div>
+
+<div
+class="sol"
+id="sol3D"
+title="Toca el Sol">
+</div>
+
+</div>
+
+
+<p>
+El Sol es una estrella situada en el centro del sistema solar.
+Su enorme masa mantiene a los planetas en órbita y su energía
+es fundamental para la vida en la Tierra.
+</p>
+
+<p>
+La energía del Sol se produce principalmente mediante
+<strong>fusión nuclear</strong>. En su núcleo, los núcleos de
+hidrógeno se combinan para formar helio y una pequeña parte
+de la masa se transforma en energía.
+</p>
+
+<p>
+La luz solar tarda aproximadamente ocho minutos y veinte
+segundos en viajar desde el Sol hasta la Tierra.
+</p>
+
+
+<div class="contenedor-tarjetas">
+
+<div class="tarjeta">
+
+<h3>🔥 Fusión nuclear</h3>
+
+<p>
+En el interior del Sol, las temperaturas y presiones son
+suficientemente altas para permitir reacciones de fusión
+nuclear que liberan enormes cantidades de energía.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>☀️ Manchas solares</h3>
+
+<p>
+Las manchas solares son regiones de la superficie visible
+que presentan temperaturas relativamente menores y están
+relacionadas con campos magnéticos intensos.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>🌠 Viento solar</h3>
+
+<p>
+El Sol libera continuamente partículas cargadas conocidas
+como viento solar. Estas partículas pueden interactuar con
+el campo magnético terrestre y contribuir a fenómenos como
+las auroras.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CURIOSIDADES
+===================================================== -->
+
+<section id="curiosidades">
+
+<div class="contenido">
+
+<h2>🤯 Curiosidades del universo</h2>
+
+
+<div class="curiosidades">
+
+<div class="curiosidad">
+
+<h3>🌌 El universo se expande</h3>
+
+<p>
+Las observaciones astronómicas muestran que el universo
+se encuentra en expansión.
+</p>
+
+</div>
+
+
+<div class="curiosidad">
+
+<h3>💡 La luz tiene una velocidad límite</h3>
+
+<p>
+En el vacío, la luz viaja aproximadamente a
+299.792 kilómetros por segundo.
+</p>
+
+</div>
+
+
+<div class="curiosidad">
+
+<h3>🌍 La Tierra también viaja</h3>
+
+<p>
+Aunque parezca que estamos quietos, la Tierra gira sobre
+su eje y también se mueve alrededor del Sol.
+</p>
+
+</div>
+
+
+<div class="curiosidad">
+
+<h3>🛰️ El espacio no está completamente vacío</h3>
+
+<p>
+El espacio contiene partículas, radiación, campos magnéticos,
+polvo y otros componentes.
+</p>
+
+</div>
+
+
+<div class="curiosidad">
+
+<h3>🌠 Vemos el pasado</h3>
+
+<p>
+Cuando observamos objetos muy lejanos, la luz que recibimos
+puede haber viajado durante millones o incluso miles de
+millones de años.
+</p>
+
+</div>
+
+
+<div class="curiosidad">
+
+<h3>🪐 Hay miles de exoplanetas</h3>
+
+<p>
+Los astrónomos han descubierto miles de planetas fuera del
+sistema solar, llamados exoplanetas.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LÍNEA DEL TIEMPO
+===================================================== -->
+
+<section>
+
+<div class="contenido">
+
+<h2>🚀 Línea del tiempo espacial</h2>
+
+
+<div class="timeline">
+
+<div class="evento">
+
+<h3>1957 — Sputnik 1</h3>
+
+<p>
+La Unión Soviética lanzó Sputnik 1, considerado el primer
+satélite artificial de la Tierra.
+</p>
+
+</div>
+
+
+<div class="evento">
+
+<h3>1961 — Primer ser humano en el espacio</h3>
+
+<p>
+Yuri Gagarin se convirtió en el primer ser humano en viajar
+al espacio.
+</p>
+
+</div>
+
+
+<div class="evento">
+
+<h3>1969 — Llegada a la Luna</h3>
+
+<p>
+La misión Apolo 11 llevó a los primeros seres humanos a la
+superficie lunar.
+</p>
+
+</div>
+
+
+<div class="evento">
+
+<h3>1990 — Telescopio Hubble</h3>
+
+<p>
+El telescopio espacial Hubble comenzó una nueva etapa de
+observaciones astronómicas desde fuera de la atmósfera terrestre.
+</p>
+
+</div>
+
+
+<div class="evento">
+
+<h3>Hoy — Exploración espacial</h3>
+
+<p>
+Actualmente continúan las investigaciones sobre planetas,
+estrellas, agujeros negros, galaxias y los orígenes del universo.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CONCLUSIÓN
+===================================================== -->
+
+<section>
+
+<div class="contenido">
+
+<h2>🌌 Conclusión</h2>
+
+<p>
+La física nos demuestra que el universo puede ser mucho más
+extraño de lo que imaginamos. Algunas ideas que parecen
+imposibles tienen una explicación científica, mientras que
+otras todavía pertenecen al territorio de las hipótesis.
+</p>
+
+<p>
+Los viajes en el tiempo, los agujeros negros, la curvatura
+del espacio-tiempo, la Luna y el Sol nos permiten comprender
+mejor hasta dónde llega nuestro conocimiento y cuáles son
+las preguntas que todavía quedan por responder.
+</p>
+
+<div class="destacado">
+
+<h3>🚀 La exploración continúa</h3>
+
+<p>
+Quizás una de las cosas más fascinantes de la ciencia es que
+cada respuesta puede abrir nuevas preguntas.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     BOTONES DE ACCIÓN
+===================================================== -->
+
+<div class="botones-accion">
+
+<button
+id="imprimirBtn"
+title="Imprimir página">
+🖨️
+</button>
+
+<button
+id="compartirBtn"
+title="Compartir página">
+📤
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     BOTÓN SONIDO
+===================================================== -->
+
+<button
+id="sonidoBtn"
+title="Activar o desactivar sonido">
+🔊
+</button>
+
+
+<!-- =====================================================
+     MENSAJE
+===================================================== -->
+
+<div id="mensaje">
+🌌 Toca los planetas y objetos para escuchar sus sonidos.
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<p>
+🌌 Física de lo Imposible
+</p>
+
+<p>
+Explorando el espacio, el tiempo y los límites de la realidad.
+</p>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   ESTRELLAS VIAJANDO HACIA EL USUARIO
+========================================================= */
+
+const viajeEstrellas =
+document.getElementById("viajeEstrellas");
+
+for(let i = 0; i < 100; i++){
+
+    const estrella =
+    document.createElement("div");
+
+    estrella.className =
+    "estrella-viaje";
+
+    estrella.style.setProperty(
+        "--x",
+        (Math.random()*2000-1000)
+    );
+
+    estrella.style.setProperty(
+        "--y",
+        (Math.random()*1400-700)
+    );
+
+    estrella.style.animationDuration =
+        (2 + Math.random()*5) + "s";
+
+    estrella.style.animationDelay =
+        (Math.random()*5) + "s";
+
+    estrella.style.width =
+        (1 + Math.random()*3) + "px";
+
+    estrella.style.height =
+        estrella.style.width;
+
+    viajeEstrellas.appendChild(estrella);
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+const mensaje =
+document.getElementById("mensaje");
+
+function mostrarMensaje(texto){
+
+    mensaje.textContent = texto;
+
+    mensaje.classList.add("mostrar");
+
+    clearTimeout(window.mensajeTimer);
+
+    window.mensajeTimer =
+    setTimeout(() => {
+
+        mensaje.classList.remove("mostrar");
+
+    }, 3000);
+}
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+let sonidoActivado = true;
+
+let audioContext = null;
+
+function iniciarAudio(){
+
+    if(!audioContext){
+
+        audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+    }
+
+    if(audioContext.state === "suspended"){
+        audioContext.resume();
+    }
+}
+
+
+/* =========================================================
+   SONIDO PLANETA
+========================================================= */
+
+function sonidoPlaneta(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const osc =
+    audioContext.createOscillator();
+
+    const gain =
+    audioContext.createGain();
+
+    osc.type = "sine";
+
+    osc.frequency.setValueAtTime(
+        110,
+        audioContext.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        70,
+        audioContext.currentTime + .6
+    );
+
+    gain.gain.setValueAtTime(
+        .0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .3,
+        audioContext.currentTime + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioContext.currentTime + .7
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioContext.currentTime + .7
+    );
+}
+
+
+/* =========================================================
+   SONIDO AGUJERO NEGRO
+========================================================= */
+
+function sonidoAgujero(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const osc =
+    audioContext.createOscillator();
+
+    const gain =
+    audioContext.createGain();
+
+    osc.type = "sawtooth";
+
+    osc.frequency.setValueAtTime(
+        100,
+        audioContext.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        25,
+        audioContext.currentTime + 1
+    );
+
+    gain.gain.setValueAtTime(
+        .0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .35,
+        audioContext.currentTime + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioContext.currentTime + 1
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioContext.currentTime + 1
+    );
+}
+
+
+/* =========================================================
+   SONIDO LUNA
+========================================================= */
+
+function sonidoLuna(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const frecuencias =
+    [523,659,784];
+
+    frecuencias.forEach(
+        (frecuencia,index) => {
+
+            const osc =
+            audioContext.createOscillator();
+
+            const gain =
+            audioContext.createGain();
+
+            osc.type = "sine";
+
+            osc.frequency.value =
+            frecuencia;
+
+            const inicio =
+            audioContext.currentTime +
+            index*.12;
+
+            gain.gain.setValueAtTime(
+                .0001,
+                inicio
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .18,
+                inicio + .03
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .0001,
+                inicio + .7
+            );
+
+            osc.connect(gain);
+
+            gain.connect(
+                audioContext.destination
+            );
+
+            osc.start(inicio);
+
+            osc.stop(inicio + .7);
+        }
+    );
+}
+
+
+/* =========================================================
+   SONIDO SOL
+========================================================= */
+
+function sonidoSol(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const osc =
+    audioContext.createOscillator();
+
+    const gain =
+    audioContext.createGain();
+
+    osc.type = "triangle";
+
+    osc.frequency.setValueAtTime(
+        180,
+        audioContext.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        700,
+        audioContext.currentTime + .5
+    );
+
+    gain.gain.setValueAtTime(
+        .0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .3,
+        audioContext.currentTime + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioContext.currentTime + .8
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioContext.currentTime + .8
+    );
+}
+
+
+/* =========================================================
+   SONIDO VIAJE EN EL TIEMPO
+========================================================= */
+
+function sonidoTiempo(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const osc =
+    audioContext.createOscillator();
+
+    const gain =
+    audioContext.createGain();
+
+    osc.type = "sine";
+
+    osc.frequency.setValueAtTime(
+        150,
+        audioContext.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        1000,
+        audioContext.currentTime + .7
+    );
+
+    gain.gain.setValueAtTime(
+        .0001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .25,
+        audioContext.currentTime + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioContext.currentTime + .8
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioContext.currentTime + .8
+    );
+}
+
+
+/* =========================================================
+   SONIDO METEORITO
+========================================================= */
+
+function sonidoMeteorito(){
+
+    if(!sonidoActivado) return;
+
+    iniciarAudio();
+
+    const osc =
+    audioContext.createOscillator();
+
+    const gain =
+    audioContext.createGain();
+
+    osc.type = "triangle";
+
+    osc.frequency.setValueAtTime(
+        700,
+        audioContext.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        80,
+        audioContext.currentTime + .25
+    );
+
+    gain.gain.setValueAtTime(
+        .15,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioContext.currentTime + .3
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioContext.currentTime + .3
+    );
+}
+
+
+/* =========================================================
+   PLANETA
+========================================================= */
+
+const planeta =
+document.getElementById("planeta3D");
+
+planeta.addEventListener(
+    "click",
+    () => {
+
+        sonidoPlaneta();
+
+        planeta.animate(
+            [
+                {
+                    transform:
+                    "scale(1) rotateY(0deg)"
+                },
+
+                {
+                    transform:
+                    "scale(1.25) rotateY(180deg)"
+                },
+
+                {
+                    transform:
+                    "scale(1) rotateY(360deg)"
+                }
+            ],
+            {
+                duration:900
+            }
+        );
+
+        mostrarMensaje(
+            "🌍 Has activado el planeta. Sonido profundo espacial."
+        );
+    }
+);
+
+
+/* =========================================================
+   AGUJERO NEGRO
+========================================================= */
+
+const agujero =
+document.getElementById("agujeroNegro");
+
+agujero.addEventListener(
+    "click",
+    () => {
+
+        sonidoAgujero();
+
+        agujero.animate(
+            [
+                {
+                    transform:
+                    "scale(1)"
+                },
+
+                {
+                    transform:
+                    "scale(.75) rotate(180deg)"
+                },
+
+                {
+                    transform:
+                    "scale(1.1) rotate(360deg)"
+                },
+
+                {
+                    transform:
+                    "scale(1)"
+                }
+            ],
+            {
+                duration:1200
+            }
+        );
+
+        mostrarMensaje(
+            "🕳️ El agujero negro está deformando el espacio-tiempo."
+        );
+    }
+);
+
+
+/* =========================================================
+   LUNA
+========================================================= */
+
+const luna =
+document.getElementById("luna3D");
+
+luna.addEventListener(
+    "click",
+    () => {
+
+        sonidoLuna();
+
+        luna.animate(
+            [
+                {
+                    transform:
+                    "scale(1)"
+                },
+
+                {
+                    transform:
+                    "scale(1.2) rotateY(180deg)"
+                },
+
+                {
+                    transform:
+                    "scale(1) rotateY(360deg)"
+                }
+            ],
+            {
+                duration:1000
+            }
+        );
+
+        mostrarMensaje(
+            "🌙 Has tocado la Luna. Sonido suave y cristalino."
+        );
+    }
+);
+
+
+/* =========================================================
+   SOL
+========================================================= */
+
+const sol =
+document.getElementById("sol3D");
+
+sol.addEventListener(
+    "click",
+    () => {
+
+        sonidoSol();
+
+        sol.classList.remove("activo");
+
+        void sol.offsetWidth;
+
+        sol.classList.add("activo");
+
+        mostrarMensaje(
+            "☀️ El Sol libera una explosión de energía."
+        );
+    }
+);
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+document.querySelectorAll(".tarjeta")
+.forEach(
+    tarjeta => {
+
+        tarjeta.addEventListener(
+            "click",
+            () => {
+
+                tarjeta.classList.toggle(
+                    "seleccionada"
+                );
+
+                sonidoTiempo();
+
+            }
+        );
+
+
+        tarjeta.addEventListener(
+            "mousemove",
+            e => {
+
+                const rect =
+                tarjeta.getBoundingClientRect();
+
+                const x =
+                e.clientX - rect.left;
+
+                const y =
+                e.clientY - rect.top;
+
+                const centroX =
+                rect.width / 2;
+
+                const centroY =
+                rect.height / 2;
+
+                const rotX =
+                (y-centroY)/10;
+
+                const rotY =
+                (centroX-x)/10;
+
+                tarjeta.style.transform =
+                `
+                translateY(-8px)
+                rotateX(${rotX}deg)
+                rotateY(${rotY}deg)
+                scale(1.02)
+                `;
+            }
+        );
+
+
+        tarjeta.addEventListener(
+            "mouseleave",
+            () => {
+
+                if(
+                    tarjeta.classList.contains(
+                        "seleccionada"
+                    )
+                ){
+
+                    tarjeta.style.transform =
+                    "translateY(-10px) scale(1.02)";
+
+                }else{
+
+                    tarjeta.style.transform =
+                    "";
+                }
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MOVIMIENTO DEL PLANETA CON EL RATÓN
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    e => {
+
+        const x =
+        (e.clientX /
+        window.innerWidth - .5) * 15;
+
+        const y =
+        (e.clientY /
+        window.innerHeight - .5) * 15;
+
+        if(
+            !planeta.matches(":active")
+        ){
+
+            planeta.style.marginLeft =
+            x + "px";
+
+            planeta.style.marginTop =
+            (30 + y) + "px";
+        }
+    }
+);
+
+
+/* =========================================================
+   ACTIVAR AUDIO CON EL PRIMER TOQUE
+========================================================= */
+
+document.addEventListener(
+    "pointerdown",
+    () => {
+
+        if(sonidoActivado){
+            iniciarAudio();
+        }
+
+    },
+    {
+        once:true
+    }
+);
+
+
+/* =========================================================
+   METEORITOS
+========================================================= */
+
+document.querySelectorAll(".meteorito")
+.forEach(
+    meteorito => {
+
+        meteorito.addEventListener(
+            "animationiteration",
+            () => {
+
+                if(Math.random() > .55){
+                    sonidoMeteorito();
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   BOTÓN DE SONIDO
+========================================================= */
+
+const sonidoBtn =
+document.getElementById("sonidoBtn");
+
+sonidoBtn.addEventListener(
+    "click",
+    () => {
+
+        sonidoActivado =
+        !sonidoActivado;
+
+        sonidoBtn.textContent =
+        sonidoActivado
+        ? "🔊"
+        : "🔇";
+
+        mostrarMensaje(
+            sonidoActivado
+            ? "🔊 Sonido activado"
+            : "🔇 Sonido desactivado"
+        );
+
+        if(sonidoActivado){
+            iniciarAudio();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BOTÓN IMPRIMIR
+========================================================= */
+
+const imprimirBtn =
+document.getElementById("imprimirBtn");
+
+imprimirBtn.addEventListener(
+    "click",
+    () => {
+
+        mostrarMensaje(
+            "🖨️ Preparando la página para imprimir..."
+        );
+
+        setTimeout(
+            () => {
+
+                window.print();
+
+            },
+            500
+        );
+
+    }
+);
+
+
+/* =========================================================
+   BOTÓN COMPARTIR
+========================================================= */
+
+const compartirBtn =
+document.getElementById("compartirBtn");
+
+compartirBtn.addEventListener(
+    "click",
+    async () => {
+
+        const datosCompartir = {
+
+            title:
+            "Física de lo Imposible",
+
+            text:
+            "🌌 Explora mi página sobre física, espacio, tiempo, agujeros negros, la Luna y el Sol.",
+
+            url:
+            window.location.href
+
+        };
+
+
+        /* COMPARTIR EN CELULAR */
+
+        if(navigator.share){
+
+            try{
+
+                await navigator.share(
+                    datosCompartir
+                );
+
+                mostrarMensaje(
+                    "📤 ¡Página compartida!"
+                );
+
+            }catch(error){
+
+                console.log(
+                    "Compartir cancelado"
+                );
+
+            }
+
+            return;
+        }
+
+
+        /* COPIAR ENLACE SI NO EXISTE COMPARTIR */
+
+        try{
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            mostrarMensaje(
+                "🔗 Enlace copiado. Ya puedes pegarlo y compartirlo."
+            );
+
+        }catch(error){
+
+            mostrarMensaje(
+                "📤 Copia el enlace de la página desde el navegador."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
